@@ -103,8 +103,15 @@ public class TicketMachine
     public int emptyMachine()
     {
         int emptyMachine;
-        emptyMachine = total;
-        total = 0;
-        return emptyMachine;
+        
+        if(balance > 0) {
+            return -1;
+        }
+        else {
+            emptyMachine = total;
+            total = 0;
+            return emptyMachine;
+        }
+        
     }   
 }
