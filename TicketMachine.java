@@ -19,18 +19,24 @@ public class TicketMachine
     private int total;
     
     private int prizeMachine;
+    
+    private int maximunTicket;
+    
+    private int sold;
 
     /**
      * Create a machine that issues tickets of the given price.
      * Si es una Máquina normal es o.
      * Si es una Máquina con premio es mayor o igual que 1.
      */
-    public TicketMachine(int cost, int prize)
+    public TicketMachine(int cost, int prize, int maximunSold)
     {
         price = cost;
         prizeMachine = prize;
+        maximunTicket = maximunSold;
         balance = 0;
         total = 0;
+        sold = 0;
     }
 
     /**
@@ -72,22 +78,24 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        if (prizeMachine <= 0 && balance >= price) {
-            // Simulate the printing of a ticket.
-            System.out.println("##################");
-            System.out.println("# The BlueJ Line");
-            System.out.println("# Ticket");
-            System.out.println("# " + price + " cents.");
-            System.out.println("##################");
-            System.out.println();
+        if (sold <= maximunTicket) {
+            if (prizeMachine <= 0 && balance >= price) {
+                // Simulate the printing of a ticket.
+                System.out.println("##################");
+                System.out.println("# The BlueJ Line");
+                System.out.println("# Ticket");
+                System.out.println("# " + price + " cents.");
+                System.out.println("##################");
+                System.out.println();
+                sold = sold + 1;
 
-            // Update the total collected with the price.
-            total = total + price;
-            // Reduce the balance by the prince.
-            balance = balance - price;
+                // Update the total collected with the price.
+                total = total + price;
+                // Reduce the balance by the prince.
+                balance = balance - price;
         }
-        else {
-            System.out.println("You must insert at least: " +
+            else {
+                System.out.println("You must insert at least: " +
                                (price - balance) + " more cents.");
                     
         }
@@ -106,6 +114,14 @@ public class TicketMachine
             System.out.println("##################");
             System.out.println();
         }
+        
+        if (sold > maximunTicket) {
+            System.out.println("##################");
+            System.out.println("ERROR");
+            System.out.println("##################");
+        }
+    }
+        
     }
 
     /**
